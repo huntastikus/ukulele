@@ -2,4 +2,3 @@
 ./gradlew --no-daemon build
 cd `dirname "$0"`
 java -jar "build/libs/ukulele.jar"
-
