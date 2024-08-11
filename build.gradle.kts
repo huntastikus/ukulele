@@ -25,6 +25,7 @@ dependencies {
     // Eventually, a full upgrade to JDA 5.x will be necessary.
     implementation("com.github.DV8FromTheWorld:JDA:legacy~v4-SNAPSHOT")
     implementation("dev.arbjerg:lavaplayer:1.5.0")
+    implementation(":youtube-plugin-1.4.0")
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("com.github.aikaterna:lavaplayer-natives:original-SNAPSHOT")
 
