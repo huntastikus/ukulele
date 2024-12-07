@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.sharding.ShardManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-//import net.dv8tion.jda.api.requests.GatewayIntent.*
+import net.dv8tion.jda.api.requests.GatewayIntent.*
 import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder
 import net.dv8tion.jda.api.utils.cache.CacheFlag
