@@ -15,6 +15,8 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 repositories {
     mavenCentral()
     maven("https://jitpack.io")
+    maven("https://maven.lavalink.dev/releases")
+    maven("https://maven.lavalink.dev/snapshots")
     //flatDir {
     //    dirs("lib")
     //}
