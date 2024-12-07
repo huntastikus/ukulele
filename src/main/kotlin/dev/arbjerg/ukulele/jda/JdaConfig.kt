@@ -5,7 +5,8 @@ import net.dv8tion.jda.api.entities.Activity
 import net.dv8tion.jda.api.sharding.ShardManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import net.dv8tion.jda.api.requests.GatewayIntent.*
+//import net.dv8tion.jda.api.requests.GatewayIntent.*
+import net.dv8tion.jda.api.requests.GatewayIntent
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder
 import net.dv8tion.jda.api.utils.cache.CacheFlag
 import net.dv8tion.jda.api.utils.messages.MessageRequest
@@ -21,6 +22,41 @@ class JdaConfig {
 
     @Bean
     fun shardManager(botProps: BotProps, eventHandler: EventHandler): ShardManager {
+        if (botProps.token.isBlank()) throw RuntimeException("Discord token not configured!")
+        val activity = if (botProps.game.isBlank()) Activity.playing("music") else Activity.playing(botProps.game)
+
+        val intents = listOf(
+            GatewayIntent.GUILD_VOICE_STATES,
+            GatewayIntent.GUILD_MESSAGES,
+            GatewayIntent.GUILD_BANS,
+            GatewayIntent.DIRECT_MESSAGES,
+            GatewayIntent.MESSAGE_CONTENT
+        )
+
+        val builder = DefaultShardManagerBuilder.create(botProps.token, intents)
+            .disableCache(CacheFlag.ACTIVITY, CacheFlag.EMOJI, CacheFlag.CLIENT_STATUS)
+            .setBulkDeleteSplittingEnabled(false)
+            .setEnableShutdownHook(false)
+            .setAutoReconnect(true)
+            .setShardsTotal(botProps.shards)
+            .addEventListeners(eventHandler)
+            .setActivity(activity)
+
+        val shardManager: ShardManager
+        try {
+            shardManager = builder.build()
+        } catch (e: LoginException) {
+            throw RuntimeException("Failed to log in to Discord! Is your token invalid?", e)
+        }
+
+        Runtime.getRuntime().addShutdownHook(thread(start = false) {
+            shardManager.guildCache.forEach {
+                if (it.audioManager.isConnected) it.audioManager.closeAudioConnection()
+            }
+        })
+
+        return shardManager
+    }    fun shardManager(botProps: BotProps, eventHandler: EventHandler): ShardManager {
         if (botProps.token.isBlank()) throw RuntimeException("Discord token not configured!")
         val activity = if (botProps.game.isBlank()) Activity.playing("music") else Activity.playing(botProps.game)
 
