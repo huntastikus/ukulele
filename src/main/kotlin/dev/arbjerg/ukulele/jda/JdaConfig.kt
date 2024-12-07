@@ -27,13 +27,12 @@ class JdaConfig {
 
 
         val intents = listOf(
-            GUILD_VOICE_STATES,
-            GUILD_MESSAGES,
-            GUILD_BANS,
-            DIRECT_MESSAGES,
-            MESSAGE_CONTENT
+            GatewayIntent.GUILD_VOICE_STATES,
+            GatewayIntent.GUILD_MESSAGES,
+            GatewayIntent.GUILD_BANS,
+            GatewayIntent.DIRECT_MESSAGES,
+            GatewayIntent.MESSAGE_CONTENT
         )
-
         val builder = DefaultShardManagerBuilder.create(botProps.token, intents)
             .disableCache(CacheFlag.ACTIVITY, CacheFlag.EMOJI, CacheFlag.CLIENT_STATUS)
             .setBulkDeleteSplittingEnabled(false)
