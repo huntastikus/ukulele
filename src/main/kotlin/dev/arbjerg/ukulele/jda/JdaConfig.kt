@@ -29,7 +29,7 @@ class JdaConfig {
         val intents = listOf(
             GatewayIntent.GUILD_VOICE_STATES,
             GatewayIntent.GUILD_MESSAGES,
-            GatewayIntent.GUILD_BANS,
+            GatewayIntent.GUILD_MODERATION, // Updated from GUILD_BANS
             GatewayIntent.DIRECT_MESSAGES,
             GatewayIntent.MESSAGE_CONTENT
         )
