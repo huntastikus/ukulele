@@ -20,10 +20,11 @@ repositories {
     maven { url = uri("https://m2.dv8tion.net/releases") }
     maven { url = uri("https://jitpack.io") }
     maven { url = uri("https://maven.lavalink.dev/releases") }
+    maven { url = uri("https://mvnrepository.com/artifact/com.github.DV8FromTheWorld/JDA") }
 }
 
 dependencies {
-    implementation("com.github.DV8FromTheWorld:JDA:v5.0.0-beta.23")
+    implementation("com.github.DV8FromTheWorld:JDA:5.0.0-beta.24")
     implementation("dev.arbjerg:lavaplayer:2.2.2")
     implementation("dev.lavalink.youtube:v2:1.8.3")
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
